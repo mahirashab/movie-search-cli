@@ -1,0 +1,15 @@
+{
+  "name": "movie-search-cli",
+  "version": "1.0.0",
+  "description": "This project can be used to search movies",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "movie",
+    "node"
+  ],
+  "author": "Mahir Ashab",
+  "license": "ISC"
+}
