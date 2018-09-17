@@ -1,19 +1,23 @@
 {
-  "name": "movie-search-cli",
-  "version": "1.0.0",
-  "description": "This project can be used to search movies",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "keywords": [
-    "movie",
-    "node"
-  ],
-  "author": "Mahir Ashab",
-  "license": "ISC",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "request": "^2.88.0"
-  }
+    "name": "movie-search-cli",
+    "version": "1.0.0",
+    "description": "This project can be used to search movies",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "keywords": [
+        "movie",
+        "node"
+    ],
+    "author": "Mahir Ashab",
+    "license": "ISC",
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.2",
+        "request": "^2.88.0",
+        "yargs": "^12.0.2"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.4"
+    }
 }
