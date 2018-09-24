@@ -1,43 +1,34 @@
 const reuest = require("request")
 const cheerio = require("cheerio")
-var Spinner = require("cli-spinner").Spinner
+const Spinner = require("cli-spinner").Spinner
 
 const questions = require("./src/inquirer")
 
-questions.askMovieName().then(ans => {
-    const url = `https://www.imdb.com/find?ref_=nv_sr_fn&q=${
-        ans.movieName
-    }&s=all`
+questions.ask().then(ans => {
+    console.log("            ")
 
-    let obj = new Spinner("Getting movie names.. %s")
+    let url = ""
+
+    const obj = new Spinner("processing.. %s")
+    obj.setSpinnerString(18)
     obj.start()
 
-    reuest(url, (err, res, body) => {
-        obj.stop(true)
-        const $ = cheerio.load(body)
-        const data = $(".findSection")
-            .first()
-            .find(".findResult")
-            .text()
+    if (ans.how === "search by keyword ?") {
+        url = `https://www.imdb.com/search/keyword?keywords=${
+            ans.movieName
+        }&mode=detail&page=1&ref_=kw_ref_key&sort=moviemeter`
+    }
 
-        console.log(data)
+    console.log(url)
+
+    reuest(url, (err, res, body) => {
+        const $ = cheerio.load(body)
+        obj.stop(true)
+        const data = $(".mode-detail")
+        // .find(".lister-item-header")
+        // .text()
+
+        console.log("            ")
+        console.log("data: " + data)
     })
 })
-
-// var obj = new Spinner("processing.. %s")
-
-// obj.start()
-
-// if (keyWord) {
-//     const url = `https://www.imdb.com/find?ref_=nv_sr_fn&q=${keyWord}&s=all`
-
-//     reuest(url, (err, res, body) => {
-//         const $ = cheerio.load(body)
-//         const data = $(".findSection")
-//             .first()
-//             .find(".findResult")
-//             .text()
-
-//         console.log(data)
-//     })
-// }
