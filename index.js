@@ -1,12 +1,29 @@
 const questions = require("./lib/inquirer")
 const requests = require("./lib/requests")
+const yargs = require("yargs")
 
-questions.ask().then(ans => {
-    console.log("            ")
+const argv = yargs.usage("Usage: $0 -way [string]").demandOption(["way"]).argv
 
-    if (ans.how === "Search by keyword ?") {
-        requests.byKeyword(ans.movieName)
-    } else if (ans.how === "Search by name ?") {
-        requests.byName(ans.movieName)
-    }
-})
+if (argv.way == "name") {
+    questions.getByName().then(ans => {
+        console.log("                 ")
+        if (ans.begin === "y" || ans.begin === "yes") {
+            requests.byName(ans.name)
+        } else {
+            console.log("                 ")
+            console.log("Bye bye!!!!!!!!")
+        }
+    })
+}
+
+if (argv.way == "keyword") {
+    questions.getByKeyword().then(ans => {
+        console.log("                 ")
+        if (ans.begin === "y" || ans.begin === "yes") {
+            requests.byKeyword(ans.keyword)
+        } else {
+            console.log("                 ")
+            console.log("Bye bye!!!!!!!!")
+        }
+    })
+}
